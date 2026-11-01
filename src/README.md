@@ -35,6 +35,25 @@ A super simple FastAPI application that allows students to view and sign up for 
 | POST   | `/activities/{activity_name}/signup?email=student@mergington.edu` | Sign up for an activity                                             |
 | DELETE | `/activities/{activity_name}/unregister?email=student@mergington.edu` | Unregister a participant (404 for an unknown activity, 400 if not signed up) |
 
+## Testing
+
+From the repository root, install dependencies and run the backend tests:
+
+```bash
+python -m pip install -r requirements.txt
+python -m pytest
+```
+
+The pytest suite lives in `tests/` and uses FastAPI's in-process `TestClient`,
+so no running server is needed. Shared fixtures restore the in-memory activity
+data after every test, including failures.
+
+Structure backend tests using Arrange-Act-Assert (AAA), separated by blank lines:
+
+- **Arrange:** prepare inputs, fixture data, and expected results.
+- **Act:** perform requests and capture responses, including subsequent activity listings.
+- **Assert:** check response status, content, and state without performing requests.
+
 ## Data Model
 
 The application uses a simple data model with meaningful identifiers:
